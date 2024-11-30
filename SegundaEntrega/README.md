@@ -1,38 +1,77 @@
-# Gestor de Memoria en C++
+# Simulador de Gestión de Memoria en C++
 
-Este proyecto es una simulación de un gestor de memoria en C++ que implementa esquemas básicos de **paginación** y **segmentación** para la administración de procesos en memoria principal (RAM) y memoria virtual. El código incluye características como manejo de fallos de página, fragmentación interna y externa, y una política de reemplazo FIFO.
+Este proyecto es una simulación educativa que ilustra cómo los sistemas operativos manejan la memoria utilizando **paginación** y **segmentación**. Proporciona una representación interactiva de la administración de memoria principal (RAM) y memoria virtual, incluyendo el manejo de fallos de página, fragmentación y una política FIFO de reemplazo de procesos.
+
+---
+
+## Tabla de Contenidos
+
+1. [Introducción](#introducción)  
+2. [Características](#características)  
+3. [Requisitos del Sistema](#requisitos-del-sistema)  
+4. [Instrucciones de Instalación](#instrucciones-de-instalación)  
+5. [Uso del Programa](#uso-del-programa)  
+6. [Ejemplo Práctico](#ejemplo-práctico)  
+7. [Detalles Técnicos](#detalles-técnicos)  
+8. [Cómo Contribuir](#cómo-contribuir)  
+9. [Licencia](#licencia)  
+
+---
+
+## Introducción
+
+En este programa, puedes gestionar procesos simulando los esquemas básicos de memoria utilizados en sistemas operativos modernos:
+
+- **Paginación:** Divide los procesos en páginas de tamaño fijo para simplificar la asignación de memoria.  
+- **Segmentación:** Divide los procesos en segmentos de tamaño variable para un manejo más flexible.  
+
+Incluye funciones avanzadas para gestionar memoria de manera eficiente, como el manejo de fallos de página, fragmentación interna y externa, compactación de memoria, y reemplazo de procesos usando la política FIFO.
+
+---
 
 ## Características
 
-- **Esquema de Paginación:** Divide los procesos en páginas de tamaño fijo y las asigna a RAM o memoria virtual.
-- **Esquema de Segmentación:** Divide los procesos en segmentos de tamaño variable para una mayor flexibilidad.
-- **FIFO para Reemplazo de Procesos:** Gestiona procesos en memoria utilizando una política de cola FIFO.
-- **Manejo de Fragmentación:**
-  - **Interna:** Detecta y reporta espacio no utilizado dentro de las páginas.
-  - **Externa:** Identifica la falta de espacio contiguo suficiente para asignar procesos.
-- **Compactación de Memoria:** Simula la compactación para reorganizar los procesos y liberar espacio contiguo.
+### Funcionalidades Clave
+
+1. **Gestión de Memoria Dual:**
+   - Memoria RAM (limitada) para procesos activos.
+   - Memoria Virtual como respaldo para procesos que no caben en RAM.
+
+2. **Modos de Asignación:**
+   - **Paginación:** Divide un proceso en páginas de tamaño fijo definido por `PAGE_SIZE`.  
+   - **Segmentación:** Divide un proceso en segmentos según su tamaño y ajustados a `SEGMENT_SIZE`.
+
+3. **Políticas de Memoria:**
+   - **FIFO:** Los procesos más antiguos se eliminan primero al liberar espacio.
+   - **Compactación:** Reorganiza procesos en memoria para reducir la fragmentación externa.
+
+4. **Manejo de Fragmentación:**
+   - **Interna:** Espacio desperdiciado dentro de las páginas.
+   - **Externa:** Espacio insuficiente contiguo para asignar procesos.
+
+5. **Interfaz Interactiva:** Un menú que permite:
+   - Agregar procesos (usando paginación o segmentación).  
+   - Visualizar el estado de la memoria.  
+   - Simular la compactación y reemplazo de procesos.
+
+### Parámetros Configurables
+
+- **`PAGE_SIZE` (4 por defecto):** Tamaño de las páginas.  
+- **`SEGMENT_SIZE` (6 por defecto):** Tamaño de los segmentos.  
+- **RAM y Memoria Virtual:** Configurables en el constructor `MemoryManager`.  
+
+---
 
 ## Requisitos del Sistema
 
-- Compilador de C++ compatible con el estándar **C++11** o superior.
-- Sistema operativo capaz de ejecutar aplicaciones de línea de comandos.
+- Compilador **C++11** o superior (e.g., `g++`, `clang++`).  
+- Acceso a terminal para ejecutar aplicaciones de línea de comandos.  
 
-## Estructura del Código
+---
 
-### Clases y Estructuras Principales
+## Instrucciones de Instalación
 
-- **`Process`**: Representa un proceso con su ID, tamaño y asignaciones de memoria (páginas o segmentos).
-- **`MemoryManager`**: Clase principal para gestionar la memoria. Incluye funciones para agregar procesos, manejar fallos de página, simular fragmentación, y compactar memoria.
-
-### Constantes
-
-- `PAGE_SIZE`: Tamaño de una página para el esquema de paginación (por defecto, 4 unidades).
-- `SEGMENT_SIZE`: Tamaño de un segmento para el esquema de segmentación (por defecto, 6 unidades).
-
-## Uso del Programa
-
-### Ejecución
-
-1. Compila el código con un compilador de C++:
+1. **Clona o descarga este repositorio.**  
+2. **Compila el código fuente:**
    ```bash
    g++ memory_manager.cpp -o memory_manager
